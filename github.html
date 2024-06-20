@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="text-align: center;">
+    <input class="btn" type="text" id="to_do">
+    <button id="submitButton">Add to do</button>
+    <ul id="result" style="text-align: left;">
+
+    <script>
+        const submitBtn = document.getElementById('submitButton')
+        submitBtn.addEventListener('click',addTodo)
+
+        function addTodo(){
+            const submit = document.getElementById('to_do').value;
+            // const p = document.createElement('p')
+            // p.innerHTML = submitValue
+            //resultValue.appendChild(p)
+            const result = document.getElementById('result');
+            result.innerHTML += `<li>${submit}</li>`
+        }
+
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => {
+            for(let i = 0;i < json.length;i++){
+                if(json[i].completed === true){
+                const result = document.getElementById('result');
+                result.innerHTML += `<li>${json[i].title}</li>`
+                }
+            }
+
+            })
+
+    </script>
+</body>
+</html>
